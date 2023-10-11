@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quizzler/questions_screen.dart';
 import 'package:quizzler/start_screen.dart';
 
+const startAlignment = Alignment.topLeft;
+const endAlignment = Alignment.bottomRight;
+
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
 
