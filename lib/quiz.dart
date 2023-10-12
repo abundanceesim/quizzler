@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/data/questions.dart';
 import 'package:quizzler/questions_screen.dart';
 import 'package:quizzler/start_screen.dart';
 
@@ -15,12 +16,23 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  // final because it won't be reassigned, data is just going to be added to it.
+  final List<String> selectedAnswers = []; 
   var activeScreen = 'start-screen'; //easier to just have it be text
 
   void switchScreen() {
     setState(() {
       activeScreen = 'questions-screen';
     });
+  }
+
+  void chooseAnswer(String answer){
+    selectedAnswers.add(answer);
+    if(selectedAnswers.length == questions.length){
+      setState(() {
+        activeScreen = 'start-screen';
+      });
+    }
   }
 
   @override
@@ -30,7 +42,7 @@ class _QuizState extends State<Quiz> {
     //     : const QuestionsScreen();
     Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == 'questions-screen'){
-      screenWidget =  const QuestionsScreen();
+      screenWidget =  QuestionsScreen(onSelectAnswer: chooseAnswer);
     }
 
     return MaterialApp(
