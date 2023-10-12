@@ -17,11 +17,12 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   // final because it won't be reassigned, data is just going to be added to it.
-  final List<String> selectedAnswers = []; 
+  List<String> selectedAnswers = []; 
   var activeScreen = 'start-screen'; //easier to just have it be text
 
   void switchScreen() {
     setState(() {
+      selectedAnswers = [];
       activeScreen = 'questions-screen';
     });
   }
