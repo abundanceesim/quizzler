@@ -15,28 +15,20 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget? activeScreen; //it would initially be null
-
-  @override
-  void initState() {
-    activeScreen = StartScreen(switchScreen);
-    super
-        .initState(); //makes sure that the regular initialization work is done as well.
-  }
+  var activeScreen = 'start-screen'; //easier to just have it be text
 
   void switchScreen() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      activeScreen = 'questions-screen';
     });
   }
-  // @override
-  // void setState() {
-  //   // TODO: implement setState
-
-  // }
 
   @override
   Widget build(context) {
+    final screenWidget = activeScreen == 'start-screen'
+        ? StartScreen(switchScreen)
+        : const QuestionsScreen();
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -45,9 +37,38 @@ class _QuizState extends State<Quiz> {
                   colors: [Color.fromARGB(255, 87, 8, 151), Colors.deepPurple],
                   begin: startAlignment,
                   end: endAlignment)),
-          child: activeScreen,
+          child: screenWidget,
         ),
       ),
     );
   }
 }
+
+
+// class _QuizState extends State<Quiz> {
+//   var activeScreen = 'start-screen'; //easier to just have it be text
+
+//   void switchScreen() {
+//     setState(() {
+//       activeScreen = 'questions-screen';
+//     });
+//   }
+
+//   @override
+//   Widget build(context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         body: Container(
+//           decoration: const BoxDecoration(
+//               gradient: LinearGradient(
+//                   colors: [Color.fromARGB(255, 87, 8, 151), Colors.deepPurple],
+//                   begin: startAlignment,
+//                   end: endAlignment)),
+//           child: activeScreen == 'start-screen'
+//               ? StartScreen(switchScreen)
+//               : QuestionsScreen(),
+//         ),
+//       ),
+//     );
+//   }
+// }
