@@ -12,7 +12,7 @@ class SummaryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //boolean
-    final isCorrectAnswer =
+     final bool isCorrectAnswer =
         itemData['user_answer'] == itemData['correct_answer'];
 
     return Padding(
@@ -43,12 +43,14 @@ class SummaryItem extends StatelessWidget {
                   height: 5,
                 ),
                 Text(itemData['user_answer'] as String,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 217, 141, 252),
+                    style: TextStyle(
+                      color: isCorrectAnswer
+                          ? Color.fromARGB(255, 121, 255, 181)
+                          : Color.fromARGB(255, 255, 153, 153),
                     )),
                 Text(itemData['correct_answer'] as String,
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 181, 254, 246),
+                      color: Color.fromARGB(255, 212, 252, 255),
                     )),
               ],
             ),
