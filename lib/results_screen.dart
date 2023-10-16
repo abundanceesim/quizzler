@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/buttons/action_button.dart';
 import 'package:quizzler/data/questions.dart';
 import 'package:quizzler/questions_summary/questions_summary.dart';
 
@@ -56,22 +57,11 @@ class ResultsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              OutlinedButton.icon(
-                  icon: const Icon(Icons.replay_outlined),
-                  onPressed: restartQuiz,
-                  style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      fixedSize: const Size(160, 40),
-                      backgroundColor: const Color.fromARGB(206, 4, 0, 122)),
-                  label: const Text('Restart Quiz')),
-              OutlinedButton.icon(
-                  icon: const Icon(Icons.arrow_back),
-                  style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      fixedSize: const Size(160, 40),
-                      backgroundColor: const Color.fromARGB(206, 4, 0, 122)),
-                  onPressed: backToHome,
-                  label: const Text('Back to Home')),
+              ActionButton(icon: Icons.arrow_back, btnText: 'Back to Home', action: backToHome),
+              ActionButton(
+                  icon: Icons.replay_outlined,
+                  btnText: 'Restart Quiz',
+                  action: restartQuiz),
             ],
           )
         ]),
