@@ -18,7 +18,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   // final because it won't be reassigned, data is just going to be added to it.
-  List<String> selectedAnswers = []; 
+  List<String> selectedAnswers = [];
   var activeScreen = 'start-screen'; //easier to just have it be text
 
   void switchScreen() {
@@ -28,18 +28,25 @@ class _QuizState extends State<Quiz> {
     });
   }
 
-  void restartQuiz(){
+  void restartQuiz() {
     setState(() {
-      // reset the number of answered questions and return to 
+      // reset the number of answered questions and return to
       // first question screen
       selectedAnswers = [];
       activeScreen = 'questions-screen';
     });
   }
 
-  void chooseAnswer(String answer){
+  void backtoHome() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'start-screen';
+    });
+  }
+
+  void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
-    if(selectedAnswers.length == questions.length){
+    if (selectedAnswers.length == questions.length) {
       setState(() {
         activeScreen = 'results-screen';
       });
@@ -52,12 +59,16 @@ class _QuizState extends State<Quiz> {
     //     ? StartScreen(switchScreen)
     //     : const QuestionsScreen();
     Widget screenWidget = StartScreen(switchScreen);
-    if (activeScreen == 'questions-screen'){
-      screenWidget =  QuestionsScreen(onSelectAnswer: chooseAnswer);
+    if (activeScreen == 'questions-screen') {
+      screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
     }
 
-    if(activeScreen == 'results-screen'){
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers, restartQuiz: restartQuiz,);
+    if (activeScreen == 'results-screen') {
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        restartQuiz: restartQuiz,
+        backToHome: backtoHome,
+      );
     }
 
     return MaterialApp(
@@ -65,7 +76,7 @@ class _QuizState extends State<Quiz> {
         body: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Color.fromARGB(255, 87, 8, 151), Colors.deepPurple],
+                  colors: [Color.fromARGB(255, 43, 4, 184), Color.fromARGB(255, 83, 236, 104)],
                   begin: startAlignment,
                   end: endAlignment)),
           child: screenWidget,
@@ -74,7 +85,6 @@ class _QuizState extends State<Quiz> {
     );
   }
 }
-
 
 // class _QuizState extends State<Quiz> {
 //   var activeScreen = 'start-screen'; //easier to just have it be text
