@@ -28,6 +28,15 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void restartQuiz(){
+    setState(() {
+      // reset the number of answered questions and return to 
+      // first question screen
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
+  }
+
   void chooseAnswer(String answer){
     selectedAnswers.add(answer);
     if(selectedAnswers.length == questions.length){
@@ -48,7 +57,7 @@ class _QuizState extends State<Quiz> {
     }
 
     if(activeScreen == 'results-screen'){
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
+      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers, restartQuiz: restartQuiz,);
     }
 
     return MaterialApp(

@@ -3,9 +3,11 @@ import 'package:quizzler/data/questions.dart';
 import 'package:quizzler/questions_summary/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.chosenAnswers});
+  const ResultsScreen(
+      {super.key, required this.chosenAnswers, required this.restartQuiz});
 
   final List<String> chosenAnswers;
+  final Function() restartQuiz;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -36,8 +38,10 @@ class ResultsScreen extends StatelessWidget {
         margin: const EdgeInsets.all(40),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-              ('You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!'),
-              style: TextStyle(color: Colors.white, fontSize: 20), textAlign: TextAlign.center,),
+            ('You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!'),
+            style: const TextStyle(color: Colors.white, fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -45,7 +49,10 @@ class ResultsScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextButton.icon( icon: const Icon(Icons.replay_10_outlined), onPressed: () {}, label: const Text('Restart Quiz!')),
+          TextButton.icon(
+              icon: const Icon(Icons.replay_10_outlined),
+              onPressed: restartQuiz,
+              label: const Text('Restart Quiz!')),
         ]),
       ),
     );
