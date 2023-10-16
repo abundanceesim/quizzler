@@ -2,6 +2,7 @@ import 'package:quizzler/models/quiz_question.dart';
 
 const questions = [
   // each question is a QuizQuestion obj
+  // the first option is the correct answer for each question.
   QuizQuestion(
     'What are the main building blocks of Flutter UIs?',
     [

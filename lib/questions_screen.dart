@@ -18,7 +18,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
   void answerQuestion(String selectedAnswer) {
-    widget.onSelectAnswer('...');
+    widget.onSelectAnswer(selectedAnswer);
 
     setState(() {
       currentQuestionIndex++; //increment index by 1 for next question.
